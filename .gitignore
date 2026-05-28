@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+
+# Generated output (students will regenerate these)
+*.html
+!example/*.html
+
+# OS
+.DS_Store
+Thumbs.db
+
+# VSCode local (settings committed separately in .vscode/settings.json)
+.vscode/launch.json
+.vscode/tasks.json

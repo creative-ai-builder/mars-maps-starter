@@ -1,0 +1,7 @@
+{
+  "editor.fontSize": 18,
+  "editor.wordWrap": "on",
+  "editor.minimap.enabled": false,
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1000
+}
