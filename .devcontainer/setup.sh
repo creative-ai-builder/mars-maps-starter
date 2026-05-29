@@ -1,8 +1,6 @@
 #!/bin/bash
 # Runs ONCE when the Codespace is first created.
-# Sets up Python packages and prints a clear first-launch message.
-
-set -e  # stop on any error
+# Never uses set -e — a failure here should not crash the whole Codespace.
 
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
@@ -10,23 +8,22 @@ echo "  🚀 Setting up your Mars Maps environment..."
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
 
-# ── Python packages ──────────────────────────────────────────────────────────
+# Install Python packages — || true means a failure here won't crash setup
 echo "📦 Installing Python packages..."
-pip install --quiet folium requests pillow
-echo "   ✅ folium, requests, pillow installed"
+pip install --quiet folium requests pillow || {
+  echo "   ⚠️  pip install failed — run 'pip install folium requests pillow' manually later"
+}
+echo "   ✅ Done"
 
-# ── Welcome message with API key setup instructions ──────────────────────────
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo "  ✅ Environment ready!"
 echo ""
-echo "  ONE more step — connect Roo Code to Claude:"
-echo ""
-echo "  1. Click the Roo Code icon in the left sidebar 🦘"
-echo "  2. When it asks for an API key, enter:  class2025"
-echo "  3. For API Base URL enter:"
+echo "  Next steps:"
+echo "  1. Run:  python verify_setup.py"
+echo "  2. Click the 🦘 Roo Code icon in the left sidebar"
+echo "  3. Enter API key:  class2025"
+echo "  4. Enter API Base URL:"
 echo "     https://mars-proxy.creative-ai-builder.workers.dev"
-echo ""
-echo "  Then run:  python verify_setup.py"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
