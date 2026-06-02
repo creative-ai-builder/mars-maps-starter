@@ -42,7 +42,13 @@
           "dropdown.background": "#1a1a2e",
           "dropdown.listBackground": "#1a1a2e",
           "dropdown.border": "#555577",
-          "list.hoverBackground": "#2d2d4a"
+          "list.hoverBackground": "#2d2d4a",
+          "input.background": "#1a1a2e",
+          "quickInput.background": "#1a1a2e",
+          "editorWidget.background": "#1a1a2e",
+          "editorWidget.border": "#555577",
+          "sideBar.background": "#160820",
+          "panel.background": "#160820"
         }
       }
     }
