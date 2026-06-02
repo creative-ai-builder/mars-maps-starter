@@ -37,7 +37,13 @@
         "roo-cline.apiProvider": "anthropic",
         "roo-cline.apiModelId": "claude-sonnet-4-6",
         "terminal.integrated.defaultProfile.linux": "bash",
-        "workbench.panel.defaultLocation": "bottom"
+        "workbench.panel.defaultLocation": "bottom",
+        "workbench.colorCustomizations": {
+          "dropdown.background": "#1a1a2e",
+          "dropdown.listBackground": "#1a1a2e",
+          "dropdown.border": "#555577",
+          "list.hoverBackground": "#2d2d4a"
+        }
       }
     }
   },
