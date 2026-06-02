@@ -21,10 +21,11 @@ MACHINE_SETTINGS="$HOME/.vscode-remote/data/Machine/settings.json"
 mkdir -p "$(dirname "$MACHINE_SETTINGS")"
 cat > "$MACHINE_SETTINGS" << 'EOF'
 {
-  "roo-cline.apiProvider": "anthropic",
-  "roo-cline.apiModelId": "claude-sonnet-4-6",
-  "roo-cline.apiKey": "class2025",
-  "roo-cline.anthropicBaseUrl": "https://mars-proxy.creative-ai-builder.workers.dev"
+  "zoo-code.apiProvider": "anthropic",
+  "zoo-code.apiModelId": "claude-sonnet-4-6",
+  "zoo-code.apiKey": "class2025",
+  "zoo-code.anthropicBaseUrl": "https://mars-proxy.creative-ai-builder.workers.dev",
+  "zoo-code.apiKey": "class2025"
 }
 EOF
 echo "   ✅ Done"
@@ -35,6 +36,6 @@ echo "  ✅ Environment ready!"
 echo ""
 echo "  Next steps:"
 echo "  1. Run:  python verify_setup.py"
-echo "  2. Click the 🦘 Roo Code icon — it should be ready to go!"
+echo "  2. Click the 🦁 Zoo Code icon — it should be ready to go!"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""

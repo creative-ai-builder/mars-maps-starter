@@ -6,7 +6,7 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "RooVeterinaryInc.roo-cline",
+        "ZooCodeOrganization.zoo-code",
         "ritwickdey.LiveServer",
         "RobbOwen.synthwave-vscode",
         "pomdtr.excalidraw-editor",
@@ -34,8 +34,8 @@
         "python.terminal.activateEnvironment": false,
         "liveServer.settings.donotShowInfoMsg": true,
         "liveServer.settings.donotVerifyTags": true,
-        "roo-cline.apiProvider": "anthropic",
-        "roo-cline.apiModelId": "claude-sonnet-4-6",
+        "zoo-code.apiProvider": "anthropic",
+        "zoo-code.apiModelId": "claude-sonnet-4-6",
         "terminal.integrated.defaultProfile.linux": "bash",
         "workbench.panel.defaultLocation": "bottom",
         "workbench.colorCustomizations": {
