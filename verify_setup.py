@@ -88,10 +88,3 @@ else:
 print(f"{BOLD}{CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━{RESET}")
 print()
 
-# Manual checks reminder
-print(f"{GOLD}  Manual checks (ask your instructor to confirm):{RESET}")
-print(f"  ☐  Roo Code icon visible in the left sidebar")
-print(f"  ☐  Roo Code responds when you type in it (try Ask mode → 'say hi')")
-print(f"  ☐  Editor theme is glowing neon (SynthWave '84)")
-print(f"  ☐  Font size looks large and easy to read")
-print()
