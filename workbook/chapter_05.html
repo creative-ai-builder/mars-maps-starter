@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 5 — Becoming the Director</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="progress-bar">
+  <span class="chapter-name">Chapter 5 of 5 — Becoming the Director</span>
+  <span class="section-count" id="section-count">Sections: 0 / 4</span>
+  <div class="badges" id="badges-bar"></div>
+</div>
+
+<main>
+  <div class="chapter-hero">
+    <span class="chapter-badge">🎬</span>
+    <div class="chapter-title">Becoming<br>the Director</div>
+    <div class="chapter-subtitle">Day 5 · Badge: Director</div>
+  </div>
+
+  <div class="section" id="section-1">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div class="section-title">The Idea</div>
+      <div class="section-status" id="s1-status">READ THIS FIRST</div>
+    </div>
+    <div class="section-body">
+      <div class="idea-text">
+        <p>By now you've built real things with AI. You know how to be specific, break things down, and catch mistakes. The last skill is the hardest one:</p>
+        <p style="margin-top:14px;font-size:18px;font-weight:700;color:var(--gold);">Knowing when to stop.</p>
+        <p style="margin-top:14px;">A director doesn't do everything they <em>could</em> do. They do what makes the <em>demo land</em>. They make the call.</p>
+        <p style="margin-top:14px;">Three questions a director asks before adding anything new:</p>
+        <ul style="margin-top:10px;padding-left:24px;display:flex;flex-direction:column;gap:8px;">
+          <li><strong style="color:var(--cyan)">Will this be visible in the demo?</strong> If parents won't see it, skip it.</li>
+          <li><strong style="color:var(--gold)">Do I have time to test it?</strong> An untested feature is a risk, not an improvement.</li>
+          <li><strong style="color:var(--green)">Does it serve my Mission?</strong> If it doesn't help tell your story, cut it.</li>
+        </ul>
+        <div class="idea-example">
+          Good director call: "My app has a small alignment bug. I have 45 minutes. I'll fix the bug and write my demo script. No new features."<br><br>
+          Scope creep: "My app works. Let me add an animated loading screen, a sound effect, and a dark mode." (No time to test any of it.)
+        </div>
+        <p style="margin-top:16px;color:var(--text-muted);font-size:14px;">The best demos aren't the most complex ones. They're the ones where the story is clear.</p>
+      </div>
+      <button class="got-it-btn" onclick="completeSection1()">Got it →</button>
+    </div>
+  </div>
+
+  <div class="section locked" id="section-2">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div class="section-title">Spot the Pattern</div>
+      <div class="section-status" id="s2-status"><span class="lock-icon">🔒</span> Complete section 1 first</div>
+    </div>
+    <div class="section-body">
+      <div class="loading" id="s2-loading"><div class="spinner"></div><br>AI is generating your exercises…</div>
+      <div id="s2-questions" class="hidden"></div>
+      <button class="submit-all-btn hidden" id="s2-submit" onclick="submitSection2()">Submit my answers →</button>
+      <div class="coach-response hidden" id="s2-feedback"></div>
+    </div>
+  </div>
+
+  <div class="section locked" id="section-3">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <div class="section-title">Try It</div>
+      <div class="section-status" id="s3-status"><span class="lock-icon">🔒</span> Complete section 2 first</div>
+    </div>
+    <div class="section-body">
+      <div class="loading" id="s3-loading"><div class="spinner"></div><br>AI is generating your exercises…</div>
+      <div id="s3-questions" class="hidden"></div>
+    </div>
+  </div>
+
+  <div class="section locked" id="section-4">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <div class="section-title">Boss Level 🏆</div>
+      <div class="section-status" id="s4-status"><span class="lock-icon">🔒</span> Complete section 3 first</div>
+    </div>
+    <div class="section-body">
+      <div class="boss-header"><span class="boss-label">Boss App</span></div>
+      <div class="boss-description">
+        Build a <strong>Mini Portfolio Page</strong> — your name, a short bio, and cards for three projects: your Space Explorer Card, your Dice Roller, and your Unit Converter. One sentence about each.<br><br>
+        Open the Boss App, build it with Zoo Code. Then write your <strong>three-beat demo script</strong> in the box below — the script you'll use when parents come to see your work.
+      </div>
+      <a class="boss-app-link" href="boss/ch5_portfolio.html" target="_blank">🌐 Open Mini Portfolio</a>
+      <div style="margin-top:16px;font-size:14px;color:var(--text-muted);">Your three-beat demo script (write it like you're talking to a parent):</div>
+      <textarea class="answer-area boss-area mt-16" id="s4-answer" placeholder="Beat 1 — What it is:&#10;This is my portfolio — a single page that shows three mini apps I built this week using AI as my partner.&#10;&#10;Beat 2 — What I asked the AI:&#10;For each project, I gave the AI a detailed spec: exact layout, exact colors, exactly how each interaction works. I had to rewrite my prompts 2-3 times to be specific enough.&#10;&#10;Beat 3 — What's coolest:&#10;Every single line of code was written by the AI. But every decision about what to build and how it should look — that was me."></textarea>
+      <button class="submit-btn mt-16" id="s4-submit" onclick="submitBoss()">Submit to coach →</button>
+      <div class="coach-response hidden" id="s4-feedback"></div>
+      <div class="hidden" id="s4-badge">
+        <div class="badge-reveal">
+          <span class="badge-icon">🎬</span>
+          <div class="badge-name">DIRECTOR BADGE EARNED</div>
+          <div class="badge-msg">You've completed all five chapters. You are a builder who knows how to direct AI.</div>
+        </div>
+        <div style="margin-top:24px;text-align:center;padding:20px;background:rgba(255,213,79,0.06);border:1px solid rgba(255,213,79,0.2);border-radius:12px;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--gold);letter-spacing:2px;">All 5 Badges Collected</div>
+          <div style="font-size:32px;margin:12px 0;letter-spacing:8px;">💬 🧩 🎯 🕵️ 🎬</div>
+          <div style="font-size:14px;color:var(--text-muted);">Show this screen to your instructor to receive your Director certificate.</div>
+        </div>
+        <button class="clipboard-btn mt-16" id="s4-copy" onclick="copyBossOutput()">📋 Copy my demo script → use it in your presentation</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script type="module">
+import { markDone, isDone, isUnlocked, isChapterUnlocked, earnBadge, getAllBadges, generateQuestions, callCoach, COACH_PROMPTS } from './coach.js';
+const CHAPTER = 5;
+const ICONS = {talker:'💬',decomposer:'🧩',specifier:'🎯','lie-spotter':'🕵️',director:'🎬'};
+
+function boot(){
+  if(!isChapterUnlocked(CHAPTER)){showLocked('Earn the Lie-Spotter badge first','chapter_04.html','← Go to Chapter 4');return;}
+  updateProgress();
+  [1,2,3,4].forEach(s=>{if(isDone(CHAPTER,s))markSectionDone(s,false);});
+  if(isUnlocked(CHAPTER,2))unlockSection(2);
+  if(isUnlocked(CHAPTER,3))unlockSection(3);
+  if(isUnlocked(CHAPTER,4))unlockSection(4);
+  if(isDone(CHAPTER,2))loadSection2(true);
+  if(isDone(CHAPTER,3))loadSection3(true);
+  if(isDone(CHAPTER,4)){document.getElementById('s4-badge').classList.remove('hidden');}
+}
+function showLocked(msg,href,lt){document.querySelector('main').innerHTML=`<div style="text-align:center;padding:80px 24px;"><div style="font-size:48px;margin-bottom:16px;">🔒</div><div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--gold);">${msg}</div><a href="${href}" style="display:inline-block;margin-top:24px;color:var(--cyan);">${lt}</a></div>`;}
+function updateProgress(){let d=0;for(let s=1;s<=4;s++)if(isDone(CHAPTER,s))d++;document.getElementById('section-count').textContent=`Sections: ${d} / 4`;const bar=document.getElementById('badges-bar');bar.innerHTML='';getAllBadges().forEach(slug=>{const p=document.createElement('div');p.className='badge-pill';p.textContent=(ICONS[slug]||'⭐')+' '+slug;bar.appendChild(p);});}
+function unlockSection(s){const el=document.getElementById(`section-${s}`);if(el)el.classList.remove('locked');const st=document.getElementById(`s${s}-status`);if(st&&!isDone(CHAPTER,s))st.textContent='IN PROGRESS';}
+function markSectionDone(s,save=true){if(save)markDone(CHAPTER,s);const st=document.getElementById(`s${s}-status`);if(st)st.textContent='✅ DONE';updateProgress();}
+
+window.completeSection1=function(){markSectionDone(1);document.querySelector('#section-1 .got-it-btn').disabled=true;unlockSection(2);loadSection2();document.getElementById('section-2').scrollIntoView({behavior:'smooth'});};
+
+let s2Q=[],s2A={};
+async function loadSection2(restored=false){
+  unlockSection(2);document.getElementById('s2-loading').classList.remove('hidden');
+  s2Q=await generateQuestions(CHAPTER,2);
+  document.getElementById('s2-loading').classList.add('hidden');
+  const c=document.getElementById('s2-questions');c.classList.remove('hidden');c.innerHTML='';
+  s2Q.forEach((q,i)=>{const d=document.createElement('div');d.className='question-card';d.innerHTML=`<div class="q-label">Decision ${i+1}</div><div class="q-text">${q.decision}</div><div style="font-size:13px;color:var(--text-muted);margin-bottom:8px;">Good call or scope creep?</div><div class="option-group"><button class="opt-btn" onclick="pickSpot(${i},'good',this)">✅ Good call</button><button class="opt-btn" onclick="pickSpot(${i},'scope-creep',this)">⚠️ Scope creep</button></div>`;c.appendChild(d);});
+  if(!restored)document.getElementById('s2-submit').classList.remove('hidden');
+  else{document.getElementById('s2-submit').classList.add('hidden');const fb=document.getElementById('s2-feedback');fb.classList.remove('hidden');fb.classList.add('ready');fb.textContent='✅ Submitted.';}
+}
+window.pickSpot=function(i,v,btn){s2A[i]=v;btn.closest('.option-group').querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');};
+window.submitSection2=async function(){
+  const btn=document.getElementById('s2-submit');btn.disabled=true;
+  const fb=document.getElementById('s2-feedback');fb.classList.remove('hidden');fb.classList.add('loading');fb.textContent='Coach reviewing…';
+  const summary=s2Q.map((q,i)=>`Decision ${i+1}: "${q.decision}" — Student:"${s2A[i]||'none'}" — Correct:"${q.classification}" — Why:${q.why}`).join('\n');
+  try{const r=await callCoach(COACH_PROMPTS.global+'\n\n'+COACH_PROMPTS.spot(CHAPTER),`Director decisions:\n${summary}`);fb.classList.remove('loading');fb.classList.add(r.includes('✅')?'ready':'warning');fb.textContent=r;}
+  catch{fb.classList.remove('loading');fb.classList.add('ready');fb.textContent='✅ Saved.';}
+  markSectionDone(2);unlockSection(3);loadSection3();document.getElementById('section-3').scrollIntoView({behavior:'smooth'});
+};
+
+let s3Q=[],s3Done=0;
+async function loadSection3(restored=false){
+  unlockSection(3);document.getElementById('s3-loading').classList.remove('hidden');
+  s3Q=await generateQuestions(CHAPTER,3);
+  document.getElementById('s3-loading').classList.add('hidden');
+  const c=document.getElementById('s3-questions');c.classList.remove('hidden');c.innerHTML='';
+  s3Q.forEach((q,i)=>{const d=document.createElement('div');d.className='question-card';d.innerHTML=`<div class="q-label">45 Minutes Left ${i+1}</div><div class="q-text">${q.scenario}</div><div class="q-hint">💡 ${q.hint}</div><div style="margin-top:12px;font-size:13px;color:var(--text-muted);">What will you do? What won't you do? Why?</div><textarea class="answer-area mt-16" id="s3-ans-${i}" ${restored?'disabled':''}></textarea>${restored?'':`<button class="submit-btn mt-16" onclick="submitTryIt(${i},this)">Submit →</button>`}<div class="coach-response hidden" id="s3-fb-${i}"></div>`;c.appendChild(d);});
+}
+window.submitTryIt=async function(i,btn){
+  btn.disabled=true;const ans=document.getElementById(`s3-ans-${i}`).value.trim();if(!ans){btn.disabled=false;return;}
+  const fb=document.getElementById(`s3-fb-${i}`);fb.classList.remove('hidden');fb.classList.add('loading');fb.textContent='Coach reviewing…';
+  try{const r=await callCoach(COACH_PROMPTS.global+'\n\n'+COACH_PROMPTS.tryIt(CHAPTER),`Scenario:"${s3Q[i].scenario}" Student plan:"${ans}"`);fb.classList.remove('loading');fb.classList.add(r.includes('✅')?'ready':'warning');fb.textContent=r;}
+  catch{fb.classList.remove('loading');fb.classList.add('ready');fb.textContent='✅ Saved.';}
+  s3Done++;if(s3Done>=s3Q.length){markSectionDone(3);unlockSection(4);document.getElementById('section-4').scrollIntoView({behavior:'smooth'});}
+};
+
+window.submitBoss=async function(){
+  const ans=document.getElementById('s4-answer').value.trim();if(!ans)return;
+  document.getElementById('s4-submit').disabled=true;
+  const fb=document.getElementById('s4-feedback');fb.classList.remove('hidden');fb.classList.add('loading');fb.textContent='Coach grading your demo script…';
+  try{const r=await callCoach(COACH_PROMPTS.global+'\n\n'+COACH_PROMPTS.boss(CHAPTER),`Demo script:\n${ans}`);fb.classList.remove('loading');fb.classList.add('ready');fb.textContent=r;}
+  catch{fb.classList.remove('loading');fb.classList.add('ready');fb.textContent='✅ Saved!';}
+  markSectionDone(4);earnBadge('director');updateProgress();
+  document.getElementById('s4-badge').classList.remove('hidden');
+};
+window.copyBossOutput=function(){navigator.clipboard.writeText(document.getElementById('s4-answer').value).then(()=>{const b=document.getElementById('s4-copy');b.textContent='✅ Copied!';setTimeout(()=>{b.textContent='📋 Copy my demo script → use it in your presentation';},2000);});};
+boot();
+</script>
+</body>
+</html>

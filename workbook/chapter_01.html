@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 1 — Talking to Your AI Partner</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="progress-bar">
+  <span class="chapter-name">Chapter 1 of 5 — Talking to Your AI Partner</span>
+  <span class="section-count" id="section-count">Sections: 0 / 4</span>
+  <div class="badges" id="badges-bar"></div>
+</div>
+
+<main>
+  <div class="chapter-hero">
+    <span class="chapter-badge">💬</span>
+    <div class="chapter-title">Talking to Your<br>AI Partner</div>
+    <div class="chapter-subtitle">Day 1 · Badge: Talker</div>
+  </div>
+
+  <!-- ══ SECTION 1 — The Idea ══ -->
+  <div class="section" id="section-1">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div class="section-title">The Idea</div>
+      <div class="section-status" id="s1-status">READ THIS FIRST</div>
+    </div>
+    <div class="section-body">
+      <div class="idea-text">
+        <p>When you talk to an AI, you write a <strong>prompt</strong> — a message that tells the AI exactly what to build or do.</p>
+        <p style="margin-top:14px;">The difference between a great prompt and a bad one isn't how long it is. It's how <strong>specific</strong> it is.</p>
+        <p style="margin-top:14px;">A good prompt has three parts:</p>
+        <ul style="margin-top:10px;padding-left:24px;display:flex;flex-direction:column;gap:8px;">
+          <li><strong style="color:var(--cyan)">Goal</strong> — what do you want to exist when it's done?</li>
+          <li><strong style="color:var(--gold)">Context</strong> — what does the AI need to know about your situation?</li>
+          <li><strong style="color:var(--green)">Constraints</strong> — what rules must it follow? (color, size, position, exact wording)</li>
+        </ul>
+        <div class="idea-example">
+          ❌ "Make the card look better"<br><br>
+          ✅ "Change the card background to dark navy (#1a1a2e), make the title 24px in white, and add a thin orange border (2px solid #e8691a)"
+        </div>
+        <p style="margin-top:16px;color:var(--text-muted);font-size:14px;">The second prompt tells the AI exactly what "better" means. It can only get it right because you were specific.</p>
+      </div>
+      <button class="got-it-btn" onclick="completeSection1()">Got it — show me the exercises →</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 2 — Spot the Pattern ══ -->
+  <div class="section locked" id="section-2">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div class="section-title">Spot the Pattern</div>
+      <div class="section-status" id="s2-status"><span class="lock-icon">🔒</span> Complete section 1 first</div>
+    </div>
+    <div class="section-body" id="s2-body">
+      <div class="loading" id="s2-loading">
+        <div class="spinner"></div><br>AI is generating your exercises…
+      </div>
+      <div id="s2-questions" class="hidden"></div>
+      <button class="submit-all-btn hidden" id="s2-submit" onclick="submitSection2()">Submit my answers →</button>
+      <div class="coach-response hidden" id="s2-feedback"></div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 3 — Try It ══ -->
+  <div class="section locked" id="section-3">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <div class="section-title">Try It</div>
+      <div class="section-status" id="s3-status"><span class="lock-icon">🔒</span> Complete section 2 first</div>
+    </div>
+    <div class="section-body" id="s3-body">
+      <div class="loading" id="s3-loading">
+        <div class="spinner"></div><br>AI is generating your exercises…
+      </div>
+      <div id="s3-questions" class="hidden"></div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 4 — Boss Level ══ -->
+  <div class="section locked" id="section-4">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <div class="section-title">Boss Level 🏆</div>
+      <div class="section-status" id="s4-status"><span class="lock-icon">🔒</span> Complete section 3 first</div>
+    </div>
+    <div class="section-body">
+      <div class="boss-header">
+        <span class="boss-label">Boss App</span>
+      </div>
+      <div class="boss-description">
+        Build a <strong>Space Explorer Card</strong> — a personal profile card with your explorer name, home planet, job title, a colored badge with your initials, and one fun fact.<br><br>
+        Open the Boss App in Live Server, then use Zoo Code to build it. When you're done, paste the prompts you sent to Zoo Code below. The coach will grade them on specificity.
+      </div>
+      <a class="boss-app-link" href="boss/ch1_space_card.html" target="_blank">🚀 Open Space Explorer Card</a>
+      <div style="margin-top:16px;font-size:14px;color:var(--text-muted);">Paste the prompts you sent to Zoo Code (one per line is fine):</div>
+      <textarea class="answer-area boss-area mt-16" id="s4-answer" placeholder="Example:&#10;Add a dark navy card with rounded corners and a thin orange border&#10;Put my name 'Alex' in white 28px text at the top&#10;Add an orange circle badge with the letter A in the center..."></textarea>
+      <button class="submit-btn mt-16" id="s4-submit" onclick="submitBoss()">Submit to coach →</button>
+      <div class="coach-response hidden" id="s4-feedback"></div>
+      <div class="hidden" id="s4-badge">
+        <div class="badge-reveal">
+          <span class="badge-icon">💬</span>
+          <div class="badge-name">TALKER BADGE EARNED</div>
+          <div class="badge-msg">You know how to give an AI what it needs to get it right.</div>
+        </div>
+        <button class="clipboard-btn" id="s4-copy" onclick="copyBossOutput()">📋 Copy my prompts → paste into Zoo Code</button>
+      </div>
+      <div class="next-chapter hidden" id="next-chapter">
+        <a class="next-btn" href="chapter_02.html">Next: Big Jobs, Small Asks →</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script type="module">
+import {
+  markDone, isDone, isUnlocked, isChapterUnlocked,
+  earnBadge, hasBadge, getAllBadges,
+  getCachedQuestions, generateQuestions,
+  callCoach, COACH_PROMPTS,
+} from './coach.js';
+
+const CHAPTER = 1;
+
+// ── Boot: restore state ─────────────────────────────────────────────────────
+function boot() {
+  updateProgress();
+  [1,2,3,4].forEach(s => {
+    if (isDone(CHAPTER, s)) markSectionDone(s, false);
+  });
+  if (isUnlocked(CHAPTER, 2)) unlockSection(2);
+  if (isUnlocked(CHAPTER, 3)) unlockSection(3);
+  if (isUnlocked(CHAPTER, 4)) unlockSection(4);
+  if (isDone(CHAPTER, 2)) loadSection2(true);
+  if (isDone(CHAPTER, 3)) loadSection3(true);
+  if (isDone(CHAPTER, 4)) {
+    document.getElementById('s4-badge').classList.remove('hidden');
+    document.getElementById('next-chapter').classList.remove('hidden');
+  }
+}
+
+function updateProgress() {
+  let done = 0;
+  for (let s = 1; s <= 4; s++) if (isDone(CHAPTER, s)) done++;
+  document.getElementById('section-count').textContent = `Sections: ${done} / 4`;
+  const bar = document.getElementById('badges-bar');
+  bar.innerHTML = '';
+  getAllBadges().forEach(slug => {
+    const pill = document.createElement('div');
+    pill.className = 'badge-pill';
+    const icons = { talker:'💬', decomposer:'🧩', specifier:'🎯', 'lie-spotter':'🕵️', director:'🎬' };
+    pill.textContent = (icons[slug] || '⭐') + ' ' + slug;
+    bar.appendChild(pill);
+  });
+}
+
+function unlockSection(s) {
+  const el = document.getElementById(`section-${s}`);
+  if (!el) return;
+  el.classList.remove('locked');
+  const status = document.getElementById(`s${s}-status`);
+  if (status && !isDone(CHAPTER, s)) status.textContent = 'IN PROGRESS';
+}
+
+function markSectionDone(s, save = true) {
+  if (save) markDone(CHAPTER, s);
+  const status = document.getElementById(`s${s}-status`);
+  if (status) status.textContent = '✅ DONE';
+  updateProgress();
+}
+
+// ── Section 1 ───────────────────────────────────────────────────────────────
+window.completeSection1 = function() {
+  markSectionDone(1);
+  document.querySelector('#section-1 .got-it-btn').disabled = true;
+  unlockSection(2);
+  loadSection2();
+  document.getElementById('section-2').scrollIntoView({ behavior: 'smooth' });
+};
+
+// ── Section 2 — Spot the Pattern ────────────────────────────────────────────
+let s2Questions = [];
+let s2Answers = {};
+
+async function loadSection2(restored = false) {
+  unlockSection(2);
+  const loading = document.getElementById('s2-loading');
+  const container = document.getElementById('s2-questions');
+  const submitBtn = document.getElementById('s2-submit');
+  loading.classList.remove('hidden');
+
+  s2Questions = await generateQuestions(CHAPTER, 2);
+
+  loading.classList.add('hidden');
+  container.classList.remove('hidden');
+  container.innerHTML = '';
+
+  s2Questions.forEach((q, i) => {
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    card.innerHTML = `
+      <div class="q-label">Pair ${i+1}</div>
+      <div class="q-text">
+        <div style="margin-bottom:8px;"><span style="color:var(--text-muted);">A:</span> ${q.vague}</div>
+        <div><span style="color:var(--text-muted);">B:</span> ${q.specific}</div>
+      </div>
+      <div style="font-size:13px;color:var(--text-muted);margin-bottom:8px;">Which prompt is more specific?</div>
+      <div class="option-group">
+        <button class="opt-btn" onclick="pickSpot(${i},'A',this)">A is more specific</button>
+        <button class="opt-btn" onclick="pickSpot(${i},'B',this)">B is more specific</button>
+      </div>
+      <div class="q-hint hidden" id="s2-hint-${i}"></div>`;
+    container.appendChild(card);
+  });
+
+  if (!restored) submitBtn.classList.remove('hidden');
+  else {
+    submitBtn.classList.add('hidden');
+    const fb = document.getElementById('s2-feedback');
+    fb.classList.remove('hidden');
+    fb.classList.add('ready');
+    fb.textContent = '✅ Submitted. Move on to Try It.';
+  }
+}
+
+window.pickSpot = function(i, choice, btn) {
+  s2Answers[i] = choice;
+  btn.closest('.option-group').querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+};
+
+window.submitSection2 = async function() {
+  const btn = document.getElementById('s2-submit');
+  btn.disabled = true;
+  const fb = document.getElementById('s2-feedback');
+  fb.classList.remove('hidden');
+  fb.classList.add('loading');
+  fb.textContent = 'Coach is reviewing your answers…';
+
+  const summary = s2Questions.map((q, i) =>
+    `Pair ${i+1}: Student chose "${s2Answers[i] || 'no answer'}". Correct answer: B (specific). Why: ${q.why}`
+  ).join('\n');
+
+  try {
+    const reply = await callCoach(
+      COACH_PROMPTS.global + '\n\n' + COACH_PROMPTS.spot(CHAPTER),
+      `Student's Spot the Pattern answers:\n${summary}`
+    );
+    fb.classList.remove('loading');
+    fb.classList.add(reply.includes('✅') ? 'ready' : 'warning');
+    fb.textContent = reply;
+    markSectionDone(2);
+    unlockSection(3);
+    loadSection3();
+    document.getElementById('section-3').scrollIntoView({ behavior: 'smooth' });
+  } catch {
+    fb.classList.remove('loading');
+    fb.classList.add('warning');
+    fb.textContent = '⚠️ Could not reach the coach. Move on — your answers were saved.';
+    markSectionDone(2);
+    unlockSection(3);
+    loadSection3();
+  }
+};
+
+// ── Section 3 — Try It ──────────────────────────────────────────────────────
+let s3Questions = [];
+
+async function loadSection3(restored = false) {
+  unlockSection(3);
+  const loading = document.getElementById('s3-loading');
+  const container = document.getElementById('s3-questions');
+  loading.classList.remove('hidden');
+
+  s3Questions = await generateQuestions(CHAPTER, 3);
+
+  loading.classList.add('hidden');
+  container.classList.remove('hidden');
+  container.innerHTML = '';
+
+  s3Questions.forEach((q, i) => {
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    const doneClass = (restored && isDone(CHAPTER, 3)) ? '' : '';
+    card.innerHTML = `
+      <div class="q-label">Try It ${i+1}</div>
+      <div class="q-text">${q.bad_prompt}</div>
+      <div class="q-hint">💡 Hint: ${q.hint}</div>
+      <div style="margin-top:12px;font-size:13px;color:var(--text-muted);">Rewrite this prompt to be more specific:</div>
+      <textarea class="answer-area mt-16" id="s3-ans-${i}" placeholder="Write your improved version here…" ${restored ? 'disabled' : ''}></textarea>
+      ${restored ? '' : `<button class="submit-btn mt-16" onclick="submitTryIt(${i},this)">Submit →</button>`}
+      <div class="coach-response hidden" id="s3-fb-${i}"></div>`;
+    container.appendChild(card);
+  });
+}
+
+let s3Done = 0;
+window.submitTryIt = async function(i, btn) {
+  btn.disabled = true;
+  const answer = document.getElementById(`s3-ans-${i}`).value.trim();
+  if (!answer) { btn.disabled = false; return; }
+  const fb = document.getElementById(`s3-fb-${i}`);
+  fb.classList.remove('hidden');
+  fb.classList.add('loading');
+  fb.textContent = 'Coach is reviewing…';
+
+  try {
+    const reply = await callCoach(
+      COACH_PROMPTS.global + '\n\n' + COACH_PROMPTS.tryIt(CHAPTER),
+      `Original bad prompt: "${s3Questions[i].bad_prompt}"\nStudent's rewrite: "${answer}"`
+    );
+    fb.classList.remove('loading');
+    fb.classList.add(reply.includes('✅') ? 'ready' : 'warning');
+    fb.textContent = reply;
+  } catch {
+    fb.classList.remove('loading');
+    fb.classList.add('ready');
+    fb.textContent = '✅ Saved — coach unavailable right now.';
+  }
+
+  s3Done++;
+  if (s3Done >= s3Questions.length) {
+    markSectionDone(3);
+    unlockSection(4);
+    document.getElementById('section-4').scrollIntoView({ behavior: 'smooth' });
+  }
+};
+
+// ── Section 4 — Boss Level ──────────────────────────────────────────────────
+window.submitBoss = async function() {
+  const answer = document.getElementById('s4-answer').value.trim();
+  if (!answer) return;
+  const btn = document.getElementById('s4-submit');
+  btn.disabled = true;
+  const fb = document.getElementById('s4-feedback');
+  fb.classList.remove('hidden');
+  fb.classList.add('loading');
+  fb.textContent = 'Coach is grading your Boss Level…';
+
+  try {
+    const reply = await callCoach(
+      COACH_PROMPTS.global + '\n\n' + COACH_PROMPTS.boss(CHAPTER),
+      `Student's Space Explorer Card prompts:\n${answer}`
+    );
+    fb.classList.remove('loading');
+    fb.classList.add(reply.includes('3') ? 'ready' : 'warning');
+    fb.textContent = reply;
+    markSectionDone(4);
+    earnBadge('talker');
+    updateProgress();
+    document.getElementById('s4-badge').classList.remove('hidden');
+    document.getElementById('next-chapter').classList.remove('hidden');
+  } catch {
+    fb.classList.remove('loading');
+    fb.classList.add('ready');
+    fb.textContent = '✅ Saved! Coach unavailable — but your prompts are recorded.';
+    markSectionDone(4);
+    earnBadge('talker');
+    updateProgress();
+    document.getElementById('s4-badge').classList.remove('hidden');
+    document.getElementById('next-chapter').classList.remove('hidden');
+  }
+};
+
+window.copyBossOutput = function() {
+  const text = document.getElementById('s4-answer').value;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('s4-copy');
+    btn.textContent = '✅ Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = '📋 Copy my prompts → paste into Zoo Code';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+};
+
+boot();
+</script>
+</body>
+</html>

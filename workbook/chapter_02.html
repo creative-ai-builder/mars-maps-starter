@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 2 — Big Jobs, Small Asks</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="progress-bar">
+  <span class="chapter-name">Chapter 2 of 5 — Big Jobs, Small Asks</span>
+  <span class="section-count" id="section-count">Sections: 0 / 4</span>
+  <div class="badges" id="badges-bar"></div>
+</div>
+
+<main>
+  <div class="chapter-hero">
+    <span class="chapter-badge">🧩</span>
+    <div class="chapter-title">Big Jobs,<br>Small Asks</div>
+    <div class="chapter-subtitle">Day 2 · Badge: Decomposer</div>
+  </div>
+
+  <!-- ══ SECTION 1 ══ -->
+  <div class="section" id="section-1">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div class="section-title">The Idea</div>
+      <div class="section-status" id="s1-status">READ THIS FIRST</div>
+    </div>
+    <div class="section-body">
+      <div class="idea-text">
+        <p>When you give AI a big ask — like "build me a dice roller with animation and sound and a score counter" — one of two things happens:</p>
+        <ul style="margin-top:10px;padding-left:24px;display:flex;flex-direction:column;gap:6px;">
+          <li>It takes 10 minutes and comes back half-wrong</li>
+          <li>It does three of the four things and forgets the rest</li>
+        </ul>
+        <p style="margin-top:14px;"><strong>Small prompts beat big prompts</strong> — every time. One ask → AI finishes fast → you check → you ask the next thing. You stay in control.</p>
+        <p style="margin-top:14px;">The three-column trick:</p>
+        <div class="idea-example">
+          What I want → Small asks → Order to send them<br><br>
+          "A dice roller" →<br>
+          1. Show a random number 1–6 when the page loads<br>
+          2. Add a Roll button that changes the number<br>
+          3. Make the number animate when it changes<br>
+          4. Add a total counter below the dice
+        </div>
+        <p style="margin-top:16px;color:var(--text-muted);font-size:14px;">Each step is one clear ask. You can verify each one works before sending the next.</p>
+      </div>
+      <button class="got-it-btn" onclick="completeSection1()">Got it →</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 2 ══ -->
+  <div class="section locked" id="section-2">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div class="section-title">Spot the Pattern</div>
+      <div class="section-status" id="s2-status"><span class="lock-icon">🔒</span> Complete section 1 first</div>
+    </div>
+    <div class="section-body">
+      <div class="loading" id="s2-loading"><div class="spinner"></div><br>AI is generating your exercises…</div>
+      <div id="s2-questions" class="hidden"></div>
+      <button class="submit-all-btn hidden" id="s2-submit" onclick="submitSection2()">Submit my answers →</button>
+      <div class="coach-response hidden" id="s2-feedback"></div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 3 ══ -->
+  <div class="section locked" id="section-3">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <div class="section-title">Try It</div>
+      <div class="section-status" id="s3-status"><span class="lock-icon">🔒</span> Complete section 2 first</div>
+    </div>
+    <div class="section-body">
+      <div class="loading" id="s3-loading"><div class="spinner"></div><br>AI is generating your exercises…</div>
+      <div id="s3-questions" class="hidden"></div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 4 — Boss Level ══ -->
+  <div class="section locked" id="section-4">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <div class="section-title">Boss Level 🏆</div>
+      <div class="section-status" id="s4-status"><span class="lock-icon">🔒</span> Complete section 3 first</div>
+    </div>
+    <div class="section-body">
+      <div class="boss-header"><span class="boss-label">Boss App</span></div>
+      <div class="boss-description">
+        Build a <strong>Dice Roller</strong> — roll 1–3 dice, show each die face as a big visual, show the total, add a roll button with an animation.<br><br>
+        Open the Boss App, build it with Zoo Code using small prompts. When done, paste your sequence of prompts below — one per line, in the order you sent them.
+      </div>
+      <a class="boss-app-link" href="boss/ch2_dice_roller.html" target="_blank">🎲 Open Dice Roller</a>
+      <div style="margin-top:16px;font-size:14px;color:var(--text-muted);">Paste your prompts in order (one per line):</div>
+      <textarea class="answer-area boss-area mt-16" id="s4-answer" placeholder="1. Show one random number 1-6 in large text on the page&#10;2. Add a Roll button below the number&#10;3. When the button is clicked, change the number to a new random value&#10;..."></textarea>
+      <button class="submit-btn mt-16" id="s4-submit" onclick="submitBoss()">Submit to coach →</button>
+      <div class="coach-response hidden" id="s4-feedback"></div>
+      <div class="hidden" id="s4-badge">
+        <div class="badge-reveal">
+          <span class="badge-icon">🧩</span>
+          <div class="badge-name">DECOMPOSER BADGE EARNED</div>
+          <div class="badge-msg">You know how to break any big job into steps an AI can actually follow.</div>
+        </div>
+        <button class="clipboard-btn" id="s4-copy" onclick="copyBossOutput()">📋 Copy my prompts → paste into Zoo Code</button>
+      </div>
+      <div class="next-chapter hidden" id="next-chapter">
+        <a class="next-btn" href="chapter_03.html">Next: Getting Specific →</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script type="module">
+import {
+  markDone, isDone, isUnlocked, isChapterUnlocked,
+  earnBadge, hasBadge, getAllBadges,
+  getCachedQuestions, generateQuestions,
+  callCoach, COACH_PROMPTS,
+} from './coach.js';
+
+const CHAPTER = 2;
+
+function boot() {
+  if (!isChapterUnlocked(CHAPTER)) {
+    document.querySelector('main').innerHTML = '<div style="text-align:center;padding:80px 24px;"><div style="font-size:48px;margin-bottom:16px;">🔒</div><div style="font-family:\'Bebas Neue\',sans-serif;font-size:32px;color:var(--gold);">Earn the Talker badge first</div><div style="margin-top:12px;color:var(--text-muted);">Complete Chapter 1 to unlock this chapter.</div><a href="chapter_01.html" style="display:inline-block;margin-top:24px;color:var(--cyan);">← Go to Chapter 1</a></div>';
+    return;
+  }
+  updateProgress();
+  [1,2,3,4].forEach(s => { if (isDone(CHAPTER, s)) markSectionDone(s, false); });
+  if (isUnlocked(CHAPTER, 2)) unlockSection(2);
+  if (isUnlocked(CHAPTER, 3)) unlockSection(3);
+  if (isUnlocked(CHAPTER, 4)) unlockSection(4);
+  if (isDone(CHAPTER, 2)) loadSection2(true);
+  if (isDone(CHAPTER, 3)) loadSection3(true);
+  if (isDone(CHAPTER, 4)) {
+    document.getElementById('s4-badge').classList.remove('hidden');
+    document.getElementById('next-chapter').classList.remove('hidden');
+  }
+}
+
+function updateProgress() {
+  let done = 0;
+  for (let s = 1; s <= 4; s++) if (isDone(CHAPTER, s)) done++;
+  document.getElementById('section-count').textContent = `Sections: ${done} / 4`;
+  const bar = document.getElementById('badges-bar');
+  bar.innerHTML = '';
+  getAllBadges().forEach(slug => {
+    const pill = document.createElement('div');
+    pill.className = 'badge-pill';
+    const icons = { talker:'💬', decomposer:'🧩', specifier:'🎯', 'lie-spotter':'🕵️', director:'🎬' };
+    pill.textContent = (icons[slug] || '⭐') + ' ' + slug;
+    bar.appendChild(pill);
+  });
+}
+
+function unlockSection(s) {
+  const el = document.getElementById(`section-${s}`);
+  if (el) el.classList.remove('locked');
+  const status = document.getElementById(`s${s}-status`);
+  if (status && !isDone(CHAPTER, s)) status.textContent = 'IN PROGRESS';
+}
+
+function markSectionDone(s, save = true) {
+  if (save) markDone(CHAPTER, s);
+  const status = document.getElementById(`s${s}-status`);
+  if (status) status.textContent = '✅ DONE';
+  updateProgress();
+}
+
+window.completeSection1 = function() {
+  markSectionDone(1);
+  document.querySelector('#section-1 .got-it-btn').disabled = true;
+  unlockSection(2);
+  loadSection2();
+  document.getElementById('section-2').scrollIntoView({ behavior: 'smooth' });
+};
+
+let s2Questions = [];
+let s2Answers = {};
+
+async function loadSection2(restored = false) {
+  unlockSection(2);
+  const loading = document.getElementById('s2-loading');
+  const container = document.getElementById('s2-questions');
+  const submitBtn = document.getElementById('s2-submit');
+  loading.classList.remove('hidden');
+  s2Questions = await generateQuestions(CHAPTER, 2);
+  loading.classList.add('hidden');
+  container.classList.remove('hidden');
+  container.innerHTML = '';
+
+  s2Questions.forEach((q, i) => {
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    card.innerHTML = `
+      <div class="q-label">Example ${i+1}</div>
+      <div class="q-text">"${q.prompt}"</div>
+      <div style="font-size:13px;color:var(--text-muted);margin-bottom:8px;">Is this one ask or many asks?</div>
+      <div class="option-group">
+        <button class="opt-btn" onclick="pickSpot(${i},'one-ask',this)">One ask</button>
+        <button class="opt-btn" onclick="pickSpot(${i},'many-asks',this)">Many asks</button>
+      </div>
+      <div class="q-hint hidden" id="s2-hint-${i}"></div>`;
+    container.appendChild(card);
+  });
+
+  if (!restored) submitBtn.classList.remove('hidden');
+  else {
+    submitBtn.classList.add('hidden');
+    const fb = document.getElementById('s2-feedback');
+    fb.classList.remove('hidden');
+    fb.classList.add('ready');
+    fb.textContent = '✅ Submitted.';
+  }
+}
+
+window.pickSpot = function(i, choice, btn) {
+  s2Answers[i] = choice;
+  btn.closest('.option-group').querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+};
+
+window.submitSection2 = async function() {
+  const btn = document.getElementById('s2-submit');
+  btn.disabled = true;
+  const fb = document.getElementById('s2-feedback');
+  fb.classList.remove('hidden');
+  fb.classList.add('loading');
+  fb.textContent = 'Coach is reviewing…';
+
+  const summary = s2Questions.map((q, i) =>
+    `Example ${i+1}: "${q.prompt}" — Student: "${s2Answers[i] || 'no answer'}" — Correct: "${q.classification}" — Why: ${q.why}`
+  ).join('\n');
+
+  try {
+    const reply = await callCoach(COACH_PROMPTS.global + '\n\n' + COACH_PROMPTS.spot(CHAPTER), `Spot the Pattern answers:\n${summary}`);
+    fb.classList.remove('loading');
+    fb.classList.add(reply.includes('✅') ? 'ready' : 'warning');
+    fb.textContent = reply;
+    markSectionDone(2);
+    unlockSection(3);
+    loadSection3();
+    document.getElementById('section-3').scrollIntoView({ behavior: 'smooth' });
+  } catch {
+    fb.classList.remove('loading');
+    fb.classList.add('ready');
+    fb.textContent = '✅ Saved — coach unavailable.';
+    markSectionDone(2);
+    unlockSection(3);
+    loadSection3();
+  }
+};
+
+let s3Questions = [];
+let s3Done = 0;
+
+async function loadSection3(restored = false) {
+  unlockSection(3);
+  const loading = document.getElementById('s3-loading');
+  const container = document.getElementById('s3-questions');
+  loading.classList.remove('hidden');
+  s3Questions = await generateQuestions(CHAPTER, 3);
+  loading.classList.add('hidden');
+  container.classList.remove('hidden');
+  container.innerHTML = '';
+
+  s3Questions.forEach((q, i) => {
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    card.innerHTML = `
+      <div class="q-label">Break it down ${i+1}</div>
+      <div class="q-text">"${q.big_prompt}"</div>
+      <div class="q-hint">💡 ${q.hint}</div>
+      <div style="margin-top:12px;font-size:13px;color:var(--text-muted);">Break this into numbered small asks, in the right order:</div>
+      <textarea class="answer-area mt-16" id="s3-ans-${i}" placeholder="1. ...\n2. ...\n3. ..." ${restored ? 'disabled' : ''}></textarea>
+      ${restored ? '' : `<button class="submit-btn mt-16" onclick="submitTryIt(${i},this)">Submit →</button>`}
+      <div class="coach-response hidden" id="s3-fb-${i}"></div>`;
+    container.appendChild(card);
+  });
+}
+
+window.submitTryIt = async function(i, btn) {
+  btn.disabled = true;
+  const answer = document.getElementById(`s3-ans-${i}`).value.trim();
+  if (!answer) { btn.disabled = false; return; }
+  const fb = document.getElementById(`s3-fb-${i}`);
+  fb.classList.remove('hidden');
+  fb.classList.add('loading');
+  fb.textContent = 'Coach is reviewing…';
+  try {
+    const reply = await callCoach(COACH_PROMPTS.global + '\n\nRubric: each step must be a single action. Steps must be in logical order.', `Big prompt: "${s3Questions[i].big_prompt}"\nStudent breakdown:\n${answer}`);
+    fb.classList.remove('loading');
+    fb.classList.add(reply.includes('✅') ? 'ready' : 'warning');
+    fb.textContent = reply;
+  } catch {
+    fb.classList.remove('loading');
+    fb.classList.add('ready');
+    fb.textContent = '✅ Saved.';
+  }
+  s3Done++;
+  if (s3Done >= s3Questions.length) {
+    markSectionDone(3);
+    unlockSection(4);
+    document.getElementById('section-4').scrollIntoView({ behavior: 'smooth' });
+  }
+};
+
+window.submitBoss = async function() {
+  const answer = document.getElementById('s4-answer').value.trim();
+  if (!answer) return;
+  const btn = document.getElementById('s4-submit');
+  btn.disabled = true;
+  const fb = document.getElementById('s4-feedback');
+  fb.classList.remove('hidden');
+  fb.classList.add('loading');
+  fb.textContent = 'Coach is grading…';
+  try {
+    const reply = await callCoach(COACH_PROMPTS.global + '\n\n' + COACH_PROMPTS.boss(CHAPTER), `Dice Roller prompt sequence:\n${answer}`);
+    fb.classList.remove('loading');
+    fb.classList.add('ready');
+    fb.textContent = reply;
+  } catch {
+    fb.classList.remove('loading');
+    fb.classList.add('ready');
+    fb.textContent = '✅ Saved!';
+  }
+  markSectionDone(4);
+  earnBadge('decomposer');
+  updateProgress();
+  document.getElementById('s4-badge').classList.remove('hidden');
+  document.getElementById('next-chapter').classList.remove('hidden');
+};
+
+window.copyBossOutput = function() {
+  navigator.clipboard.writeText(document.getElementById('s4-answer').value).then(() => {
+    const btn = document.getElementById('s4-copy');
+    btn.textContent = '✅ Copied!';
+    setTimeout(() => { btn.textContent = '📋 Copy my prompts → paste into Zoo Code'; }, 2000);
+  });
+};
+
+boot();
+</script>
+</body>
+</html>

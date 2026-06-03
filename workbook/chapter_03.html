@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 3 — Getting Specific</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="progress-bar">
+  <span class="chapter-name">Chapter 3 of 5 — Getting Specific</span>
+  <span class="section-count" id="section-count">Sections: 0 / 4</span>
+  <div class="badges" id="badges-bar"></div>
+</div>
+
+<main>
+  <div class="chapter-hero">
+    <span class="chapter-badge">🎯</span>
+    <div class="chapter-title">Getting<br>Specific</div>
+    <div class="chapter-subtitle">Day 3 · Badge: Specifier</div>
+  </div>
+
+  <div class="section" id="section-1">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div class="section-title">The Idea</div>
+      <div class="section-status" id="s1-status">READ THIS FIRST</div>
+    </div>
+    <div class="section-body">
+      <div class="idea-text">
+        <p>You can have a small prompt that still goes wrong. Why? Because you didn't say how you'd know it was <strong>done correctly</strong>.</p>
+        <p style="margin-top:14px;">Professionals call this <strong>acceptance criteria</strong> — the exact conditions that make something "done."</p>
+        <ul style="margin-top:10px;padding-left:24px;display:flex;flex-direction:column;gap:8px;">
+          <li><strong style="color:var(--cyan)">Units:</strong> km or miles? Celsius or Fahrenheit? 2 decimal places or 4?</li>
+          <li><strong style="color:var(--gold)">Position:</strong> top-left corner? centered? 16px from the edge?</li>
+          <li><strong style="color:var(--green)">Trigger:</strong> on keypress? on button click? on page load?</li>
+          <li><strong style="color:var(--red)">Edge cases:</strong> what happens if the input is empty? negative? a letter?</li>
+        </ul>
+        <div class="idea-example">
+          ❌ "Show the answer rounded off"<br><br>
+          ✅ "Display the result rounded to 2 decimal places in a bold span directly below the input, updating live as the user types"
+        </div>
+        <p style="margin-top:16px;color:var(--text-muted);font-size:14px;">The second prompt answers: how many decimals, where it goes, and when it updates. No guessing.</p>
+      </div>
+      <button class="got-it-btn" onclick="completeSection1()">Got it →</button>
+    </div>
+  </div>
+
+  <div class="section locked" id="section-2">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div class="section-title">Spot the Pattern</div>
+      <div class="section-status" id="s2-status"><span class="lock-icon">🔒</span> Complete section 1 first</div>
+    </div>
+    <div class="section-body">
+      <div class="loading" id="s2-loading"><div class="spinner"></div><br>AI is generating your exercises…</div>
+      <div id="s2-questions" class="hidden"></div>
+      <button class="submit-all-btn hidden" id="s2-submit" onclick="submitSection2()">Submit my answers →</button>
+      <div class="coach-response hidden" id="s2-feedback"></div>
+    </div>
+  </div>
+
+  <div class="section locked" id="section-3">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <div class="section-title">Try It</div>
+      <div class="section-status" id="s3-status"><span class="lock-icon">🔒</span> Complete section 2 first</div>
+    </div>
+    <div class="section-body">
+      <div class="loading" id="s3-loading"><div class="spinner"></div><br>AI is generating your exercises…</div>
+      <div id="s3-questions" class="hidden"></div>
+    </div>
+  </div>
+
+  <div class="section locked" id="section-4">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <div class="section-title">Boss Level 🏆</div>
+      <div class="section-status" id="s4-status"><span class="lock-icon">🔒</span> Complete section 3 first</div>
+    </div>
+    <div class="section-body">
+      <div class="boss-header"><span class="boss-label">Boss App</span></div>
+      <div class="boss-description">
+        Build a <strong>Unit Converter</strong> — km↔miles, °C↔°F, kg↔lbs. Three sections, results shown to 2 decimal places, live updating as the user types, input rejects non-numbers.<br><br>
+        Open the Boss App, build it with Zoo Code. Then paste the full specification you gave the AI — every requirement, every constraint, every edge case.
+      </div>
+      <a class="boss-app-link" href="boss/ch3_unit_converter.html" target="_blank">🌡️ Open Unit Converter</a>
+      <div style="margin-top:16px;font-size:14px;color:var(--text-muted);">Paste the specification you gave to Zoo Code:</div>
+      <textarea class="answer-area boss-area mt-16" id="s4-answer" placeholder="Build a unit converter with three sections: km to miles, Celsius to Fahrenheit, kg to pounds.&#10;Each section has one input field and one output field.&#10;Results must be shown to exactly 2 decimal places.&#10;The result updates live as the user types — no submit button needed.&#10;If the user types a letter, ignore it and keep the last valid value.&#10;..."></textarea>
+      <button class="submit-btn mt-16" id="s4-submit" onclick="submitBoss()">Submit to coach →</button>
+      <div class="coach-response hidden" id="s4-feedback"></div>
+      <div class="hidden" id="s4-badge">
+        <div class="badge-reveal">
+          <span class="badge-icon">🎯</span>
+          <div class="badge-name">SPECIFIER BADGE EARNED</div>
+          <div class="badge-msg">You know how to write requirements that leave no room for guessing.</div>
+        </div>
+        <button class="clipboard-btn" id="s4-copy" onclick="copyBossOutput()">📋 Copy my spec → paste into Zoo Code</button>
+      </div>
+      <div class="next-chapter hidden" id="next-chapter">
+        <a class="next-btn" href="chapter_04.html">Next: When AI Lies →</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script type="module">
+import { markDone, isDone, isUnlocked, isChapterUnlocked, earnBadge, getAllBadges, generateQuestions, callCoach, COACH_PROMPTS } from './coach.js';
+const CHAPTER = 3;
+
+function boot() {
+  if (!isChapterUnlocked(CHAPTER)) { showLocked('Earn the Decomposer badge first', 'chapter_02.html', '← Go to Chapter 2'); return; }
+  updateProgress();
+  [1,2,3,4].forEach(s => { if (isDone(CHAPTER, s)) markSectionDone(s, false); });
+  if (isUnlocked(CHAPTER, 2)) unlockSection(2);
+  if (isUnlocked(CHAPTER, 3)) unlockSection(3);
+  if (isUnlocked(CHAPTER, 4)) unlockSection(4);
+  if (isDone(CHAPTER, 2)) loadSection2(true);
+  if (isDone(CHAPTER, 3)) loadSection3(true);
+  if (isDone(CHAPTER, 4)) { document.getElementById('s4-badge').classList.remove('hidden'); document.getElementById('next-chapter').classList.remove('hidden'); }
+}
+
+function showLocked(msg, href, linkText) {
+  document.querySelector('main').innerHTML = `<div style="text-align:center;padding:80px 24px;"><div style="font-size:48px;margin-bottom:16px;">🔒</div><div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--gold);">${msg}</div><a href="${href}" style="display:inline-block;margin-top:24px;color:var(--cyan);">${linkText}</a></div>`;
+}
+function updateProgress() {
+  let done = 0; for (let s=1;s<=4;s++) if(isDone(CHAPTER,s)) done++;
+  document.getElementById('section-count').textContent = `Sections: ${done} / 4`;
+  const bar = document.getElementById('badges-bar'); bar.innerHTML = '';
+  const icons = {talker:'💬',decomposer:'🧩',specifier:'🎯','lie-spotter':'🕵️',director:'🎬'};
+  getAllBadges().forEach(slug => { const p=document.createElement('div'); p.className='badge-pill'; p.textContent=(icons[slug]||'⭐')+' '+slug; bar.appendChild(p); });
+}
+function unlockSection(s) {
+  const el = document.getElementById(`section-${s}`); if(el) el.classList.remove('locked');
+  const st = document.getElementById(`s${s}-status`); if(st && !isDone(CHAPTER,s)) st.textContent='IN PROGRESS';
+}
+function markSectionDone(s, save=true) {
+  if(save) markDone(CHAPTER,s);
+  const st = document.getElementById(`s${s}-status`); if(st) st.textContent='✅ DONE';
+  updateProgress();
+}
+
+window.completeSection1 = function() { markSectionDone(1); document.querySelector('#section-1 .got-it-btn').disabled=true; unlockSection(2); loadSection2(); document.getElementById('section-2').scrollIntoView({behavior:'smooth'}); };
+
+let s2Q=[],s2A={};
+async function loadSection2(restored=false) {
+  unlockSection(2);
+  document.getElementById('s2-loading').classList.remove('hidden');
+  s2Q = await generateQuestions(CHAPTER, 2);
+  document.getElementById('s2-loading').classList.add('hidden');
+  const c = document.getElementById('s2-questions'); c.classList.remove('hidden'); c.innerHTML='';
+  s2Q.forEach((q,i) => {
+    const d=document.createElement('div'); d.className='question-card';
+    d.innerHTML=`<div class="q-label">Pair ${i+1}</div><div class="q-text"><div style="margin-bottom:8px;"><span style="color:var(--text-muted);">Vague:</span> ${q.vague}</div><div><span style="color:var(--text-muted);">Specific:</span> ${q.specific}</div></div><div style="font-size:13px;color:var(--text-muted);margin-bottom:8px;">What makes the specific version better? (pick all that apply)</div><div class="option-group"><button class="opt-btn" onclick="toggleOpt(this)">Names units</button><button class="opt-btn" onclick="toggleOpt(this)">Names position</button><button class="opt-btn" onclick="toggleOpt(this)">Names trigger</button><button class="opt-btn" onclick="toggleOpt(this)">Handles edge case</button></div>`;
+    c.appendChild(d);
+  });
+  if(!restored) document.getElementById('s2-submit').classList.remove('hidden');
+  else { document.getElementById('s2-submit').classList.add('hidden'); const fb=document.getElementById('s2-feedback'); fb.classList.remove('hidden'); fb.classList.add('ready'); fb.textContent='✅ Submitted.'; }
+}
+window.toggleOpt = function(btn) { btn.classList.toggle('selected'); };
+window.submitSection2 = async function() {
+  const btn=document.getElementById('s2-submit'); btn.disabled=true;
+  const fb=document.getElementById('s2-feedback'); fb.classList.remove('hidden'); fb.classList.add('loading'); fb.textContent='Coach reviewing…';
+  const summary=s2Q.map((q,i)=>`Pair ${i+1}: vague="${q.vague}" specific="${q.specific}" why="${q.why}"`).join('\n');
+  try { const r=await callCoach(COACH_PROMPTS.global+'\n\n'+COACH_PROMPTS.spot(CHAPTER),`Spot the Pattern:\n${summary}`); fb.classList.remove('loading'); fb.classList.add(r.includes('✅')?'ready':'warning'); fb.textContent=r; }
+  catch { fb.classList.remove('loading'); fb.classList.add('ready'); fb.textContent='✅ Saved.'; }
+  markSectionDone(2); unlockSection(3); loadSection3(); document.getElementById('section-3').scrollIntoView({behavior:'smooth'});
+};
+
+let s3Q=[],s3Done=0;
+async function loadSection3(restored=false) {
+  unlockSection(3); document.getElementById('s3-loading').classList.remove('hidden');
+  s3Q = await generateQuestions(CHAPTER, 3);
+  document.getElementById('s3-loading').classList.add('hidden');
+  const c=document.getElementById('s3-questions'); c.classList.remove('hidden'); c.innerHTML='';
+  s3Q.forEach((q,i)=>{ const d=document.createElement('div'); d.className='question-card'; d.innerHTML=`<div class="q-label">Fix it ${i+1}</div><div class="q-text">A student sent: <em>"${q.bad_prompt}"</em></div><div class="q-hint">What went wrong: ${q.what_went_wrong}</div><div style="margin-top:12px;font-size:13px;color:var(--text-muted);">Rewrite the prompt to prevent all those problems:</div><textarea class="answer-area mt-16" id="s3-ans-${i}" ${restored?'disabled':''}></textarea>${restored?'':`<button class="submit-btn mt-16" onclick="submitTryIt(${i},this)">Submit →</button>`}<div class="coach-response hidden" id="s3-fb-${i}"></div>`; c.appendChild(d); });
+}
+window.submitTryIt = async function(i,btn) {
+  btn.disabled=true; const ans=document.getElementById(`s3-ans-${i}`).value.trim(); if(!ans){btn.disabled=false;return;}
+  const fb=document.getElementById(`s3-fb-${i}`); fb.classList.remove('hidden'); fb.classList.add('loading'); fb.textContent='Coach reviewing…';
+  try { const r=await callCoach(COACH_PROMPTS.global+'\n\n'+COACH_PROMPTS.tryIt(CHAPTER),`Bad prompt:"${s3Q[i].bad_prompt}" What went wrong:"${s3Q[i].what_went_wrong}" Rewrite:"${ans}"`); fb.classList.remove('loading'); fb.classList.add(r.includes('✅')?'ready':'warning'); fb.textContent=r; }
+  catch { fb.classList.remove('loading'); fb.classList.add('ready'); fb.textContent='✅ Saved.'; }
+  s3Done++; if(s3Done>=s3Q.length){ markSectionDone(3); unlockSection(4); document.getElementById('section-4').scrollIntoView({behavior:'smooth'}); }
+};
+
+window.submitBoss = async function() {
+  const ans=document.getElementById('s4-answer').value.trim(); if(!ans)return;
+  document.getElementById('s4-submit').disabled=true;
+  const fb=document.getElementById('s4-feedback'); fb.classList.remove('hidden'); fb.classList.add('loading'); fb.textContent='Coach grading…';
+  try { const r=await callCoach(COACH_PROMPTS.global+'\n\n'+COACH_PROMPTS.boss(CHAPTER),`Unit Converter spec:\n${ans}`); fb.classList.remove('loading'); fb.classList.add('ready'); fb.textContent=r; }
+  catch { fb.classList.remove('loading'); fb.classList.add('ready'); fb.textContent='✅ Saved!'; }
+  markSectionDone(4); earnBadge('specifier'); updateProgress();
+  document.getElementById('s4-badge').classList.remove('hidden'); document.getElementById('next-chapter').classList.remove('hidden');
+};
+window.copyBossOutput = function() { navigator.clipboard.writeText(document.getElementById('s4-answer').value).then(()=>{ const b=document.getElementById('s4-copy'); b.textContent='✅ Copied!'; setTimeout(()=>{b.textContent='📋 Copy my spec → paste into Zoo Code';},2000); }); };
+boot();
+</script>
+</body>
+</html>

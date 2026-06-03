@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 4 — When AI Lies</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="progress-bar">
+  <span class="chapter-name">Chapter 4 of 5 — When AI Lies</span>
+  <span class="section-count" id="section-count">Sections: 0 / 4</span>
+  <div class="badges" id="badges-bar"></div>
+</div>
+
+<main>
+  <div class="chapter-hero">
+    <span class="chapter-badge">🕵️</span>
+    <div class="chapter-title">When AI<br>Lies</div>
+    <div class="chapter-subtitle">Day 4 · Badge: Lie-Spotter</div>
+  </div>
+
+  <div class="section" id="section-1">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div class="section-title">The Idea</div>
+      <div class="section-status" id="s1-status">READ THIS FIRST</div>
+    </div>
+    <div class="section-body">
+      <div class="idea-text">
+        <p>AI makes stuff up. It does it confidently. It does it in a calm voice. And it does it <em>all the time</em>.</p>
+        <p style="margin-top:14px;">This is called a <strong>hallucination</strong> — when AI states something false as if it were true. It's not lying on purpose. It just doesn't know what it doesn't know.</p>
+        <p style="margin-top:14px;">Three warning signs:</p>
+        <ul style="margin-top:10px;padding-left:24px;display:flex;flex-direction:column;gap:8px;">
+          <li><strong style="color:var(--red)">Confident and specific:</strong> "The function is called getMapCoords()" — sounds authoritative, might be invented</li>
+          <li><strong style="color:var(--gold)">The same fix three times:</strong> AI keeps trying the same thing and it keeps not working</li>
+          <li><strong style="color:var(--cyan)">Can't be verified easily:</strong> AI says something that would take you hours to check</li>
+        </ul>
+        <div class="idea-example">
+          The fix: verify before you accept.<br><br>
+          • Check MDN (developer.mozilla.org) for any JavaScript fact<br>
+          • Open browser DevTools console and test it yourself<br>
+          • Ask AI: "Are you sure? Can you show me a source?"<br>
+          • Try a tiny test snippet instead of the full feature
+        </div>
+        <p style="margin-top:16px;color:var(--text-muted);font-size:14px;">You're the editor. AI is the first draft. First drafts have mistakes.</p>
+      </div>
+      <button class="got-it-btn" onclick="completeSection1()">Got it →</button>
+    </div>
+  </div>
+
+  <div class="section locked" id="section-2">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div class="section-title">Spot the Pattern</div>
+      <div class="section-status" id="s2-status"><span class="lock-icon">🔒</span> Complete section 1 first</div>
+    </div>
+    <div class="section-body">
+      <div class="loading" id="s2-loading"><div class="spinner"></div><br>AI is generating your exercises…</div>
+      <div id="s2-questions" class="hidden"></div>
+      <button class="submit-all-btn hidden" id="s2-submit" onclick="submitSection2()">Submit my answers →</button>
+      <div class="coach-response hidden" id="s2-feedback"></div>
+    </div>
+  </div>
+
+  <div class="section locked" id="section-3">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <div class="section-title">Try It</div>
+      <div class="section-status" id="s3-status"><span class="lock-icon">🔒</span> Complete section 2 first</div>
+    </div>
+    <div class="section-body">
+      <div class="loading" id="s3-loading"><div class="spinner"></div><br>AI is generating your exercises…</div>
+      <div id="s3-questions" class="hidden"></div>
+    </div>
+  </div>
+
+  <div class="section locked" id="section-4">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <div class="section-title">Boss Level 🏆</div>
+      <div class="section-status" id="s4-status"><span class="lock-icon">🔒</span> Complete section 3 first</div>
+    </div>
+    <div class="section-body">
+      <div class="boss-header"><span class="boss-label">Boss App</span></div>
+      <div class="boss-description">
+        Build a <strong>Trivia Quiz</strong> — 5 questions on a topic you pick (space, animals, sports, etc.). Zoo Code writes the Q&amp;A. Before you accept any answer, you must verify it's correct.<br><br>
+        Open the Boss App, build it with Zoo Code. Then write below: which answer(s) you caught being wrong, and how you verified them.
+      </div>
+      <a class="boss-app-link" href="boss/ch4_trivia_quiz.html" target="_blank">🧠 Open Trivia Quiz</a>
+      <div style="margin-top:16px;font-size:14px;color:var(--text-muted);">What did you catch? How did you verify it?</div>
+      <textarea class="answer-area boss-area mt-16" id="s4-answer" placeholder="Question 3 said the speed of light is 200,000 km/s. I Googled it and it's actually 299,792 km/s. I fixed the question before adding it to my quiz.&#10;&#10;All other answers I checked by searching or already knew they were right."></textarea>
+      <button class="submit-btn mt-16" id="s4-submit" onclick="submitBoss()">Submit to coach →</button>
+      <div class="coach-response hidden" id="s4-feedback"></div>
+      <div class="hidden" id="s4-badge">
+        <div class="badge-reveal">
+          <span class="badge-icon">🕵️</span>
+          <div class="badge-name">LIE-SPOTTER BADGE EARNED</div>
+          <div class="badge-msg">You know that AI is the first draft. You're the editor.</div>
+        </div>
+        <button class="clipboard-btn" id="s4-copy" onclick="copyBossOutput()">📋 Copy my notes → save for your demo</button>
+      </div>
+      <div class="next-chapter hidden" id="next-chapter">
+        <a class="next-btn" href="chapter_05.html">Next: Becoming the Director →</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script type="module">
+import { markDone, isDone, isUnlocked, isChapterUnlocked, earnBadge, getAllBadges, generateQuestions, callCoach, COACH_PROMPTS } from './coach.js';
+const CHAPTER = 4;
+const ICONS = {talker:'💬',decomposer:'🧩',specifier:'🎯','lie-spotter':'🕵️',director:'🎬'};
+
+function boot() {
+  if(!isChapterUnlocked(CHAPTER)){showLocked('Earn the Specifier badge first','chapter_03.html','← Go to Chapter 3');return;}
+  updateProgress();
+  [1,2,3,4].forEach(s=>{if(isDone(CHAPTER,s))markSectionDone(s,false);});
+  if(isUnlocked(CHAPTER,2))unlockSection(2);
+  if(isUnlocked(CHAPTER,3))unlockSection(3);
+  if(isUnlocked(CHAPTER,4))unlockSection(4);
+  if(isDone(CHAPTER,2))loadSection2(true);
+  if(isDone(CHAPTER,3))loadSection3(true);
+  if(isDone(CHAPTER,4)){document.getElementById('s4-badge').classList.remove('hidden');document.getElementById('next-chapter').classList.remove('hidden');}
+}
+function showLocked(msg,href,linkText){document.querySelector('main').innerHTML=`<div style="text-align:center;padding:80px 24px;"><div style="font-size:48px;margin-bottom:16px;">🔒</div><div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--gold);">${msg}</div><a href="${href}" style="display:inline-block;margin-top:24px;color:var(--cyan);">${linkText}</a></div>`;}
+function updateProgress(){let d=0;for(let s=1;s<=4;s++)if(isDone(CHAPTER,s))d++;document.getElementById('section-count').textContent=`Sections: ${d} / 4`;const bar=document.getElementById('badges-bar');bar.innerHTML='';getAllBadges().forEach(slug=>{const p=document.createElement('div');p.className='badge-pill';p.textContent=(ICONS[slug]||'⭐')+' '+slug;bar.appendChild(p);});}
+function unlockSection(s){const el=document.getElementById(`section-${s}`);if(el)el.classList.remove('locked');const st=document.getElementById(`s${s}-status`);if(st&&!isDone(CHAPTER,s))st.textContent='IN PROGRESS';}
+function markSectionDone(s,save=true){if(save)markDone(CHAPTER,s);const st=document.getElementById(`s${s}-status`);if(st)st.textContent='✅ DONE';updateProgress();}
+
+window.completeSection1=function(){markSectionDone(1);document.querySelector('#section-1 .got-it-btn').disabled=true;unlockSection(2);loadSection2();document.getElementById('section-2').scrollIntoView({behavior:'smooth'});};
+
+let s2Q=[],s2A={};
+async function loadSection2(restored=false){
+  unlockSection(2);document.getElementById('s2-loading').classList.remove('hidden');
+  s2Q=await generateQuestions(CHAPTER,2);
+  document.getElementById('s2-loading').classList.add('hidden');
+  const c=document.getElementById('s2-questions');c.classList.remove('hidden');c.innerHTML='';
+  s2Q.forEach((q,i)=>{const d=document.createElement('div');d.className='question-card';d.innerHTML=`<div class="q-label">AI Response ${i+1}</div><div class="q-text" style="font-style:italic;">"${q.ai_response}"</div><div style="font-size:13px;color:var(--text-muted);margin-bottom:8px;">Is this correct, a hallucination, or half-right?</div><div class="option-group"><button class="opt-btn" onclick="pickSpot(${i},'correct',this)">✅ Correct</button><button class="opt-btn" onclick="pickSpot(${i},'hallucination',this)">❌ Hallucination</button><button class="opt-btn" onclick="pickSpot(${i},'half-right',this)">⚠️ Half-right</button></div>`;c.appendChild(d);});
+  if(!restored)document.getElementById('s2-submit').classList.remove('hidden');
+  else{document.getElementById('s2-submit').classList.add('hidden');const fb=document.getElementById('s2-feedback');fb.classList.remove('hidden');fb.classList.add('ready');fb.textContent='✅ Submitted.';}
+}
+window.pickSpot=function(i,v,btn){s2A[i]=v;btn.closest('.option-group').querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');};
+window.submitSection2=async function(){
+  const btn=document.getElementById('s2-submit');btn.disabled=true;
+  const fb=document.getElementById('s2-feedback');fb.classList.remove('hidden');fb.classList.add('loading');fb.textContent='Coach reviewing…';
+  const summary=s2Q.map((q,i)=>`Response ${i+1}: "${q.ai_response}" — Student:"${s2A[i]||'none'}" — Correct:"${q.classification}" — Why:${q.why}`).join('\n');
+  try{const r=await callCoach(COACH_PROMPTS.global+'\n\n'+COACH_PROMPTS.spot(CHAPTER),`Lie-spotting:\n${summary}`);fb.classList.remove('loading');fb.classList.add(r.includes('✅')?'ready':'warning');fb.textContent=r;}
+  catch{fb.classList.remove('loading');fb.classList.add('ready');fb.textContent='✅ Saved.';}
+  markSectionDone(2);unlockSection(3);loadSection3();document.getElementById('section-3').scrollIntoView({behavior:'smooth'});
+};
+
+let s3Q=[],s3Done=0;
+async function loadSection3(restored=false){
+  unlockSection(3);document.getElementById('s3-loading').classList.remove('hidden');
+  s3Q=await generateQuestions(CHAPTER,3);
+  document.getElementById('s3-loading').classList.add('hidden');
+  const c=document.getElementById('s3-questions');c.classList.remove('hidden');c.innerHTML='';
+  s3Q.forEach((q,i)=>{const d=document.createElement('div');d.className='question-card';d.innerHTML=`<div class="q-label">Stuck AI ${i+1}</div><div class="q-text">${q.scenario}</div><div class="q-hint">💡 ${q.hint}</div><div style="margin-top:12px;font-size:13px;color:var(--text-muted);">How would you verify it's wrong, and what would you try next?</div><textarea class="answer-area mt-16" id="s3-ans-${i}" ${restored?'disabled':''}></textarea>${restored?'':`<button class="submit-btn mt-16" onclick="submitTryIt(${i},this)">Submit →</button>`}<div class="coach-response hidden" id="s3-fb-${i}"></div>`;c.appendChild(d);});
+}
+window.submitTryIt=async function(i,btn){
+  btn.disabled=true;const ans=document.getElementById(`s3-ans-${i}`).value.trim();if(!ans){btn.disabled=false;return;}
+  const fb=document.getElementById(`s3-fb-${i}`);fb.classList.remove('hidden');fb.classList.add('loading');fb.textContent='Coach reviewing…';
+  try{const r=await callCoach(COACH_PROMPTS.global+'\n\n'+COACH_PROMPTS.tryIt(CHAPTER),`Scenario:"${s3Q[i].scenario}" Student response:"${ans}"`);fb.classList.remove('loading');fb.classList.add(r.includes('✅')?'ready':'warning');fb.textContent=r;}
+  catch{fb.classList.remove('loading');fb.classList.add('ready');fb.textContent='✅ Saved.';}
+  s3Done++;if(s3Done>=s3Q.length){markSectionDone(3);unlockSection(4);document.getElementById('section-4').scrollIntoView({behavior:'smooth'});}
+};
+
+window.submitBoss=async function(){
+  const ans=document.getElementById('s4-answer').value.trim();if(!ans)return;
+  document.getElementById('s4-submit').disabled=true;
+  const fb=document.getElementById('s4-feedback');fb.classList.remove('hidden');fb.classList.add('loading');fb.textContent='Coach grading…';
+  try{const r=await callCoach(COACH_PROMPTS.global+'\n\n'+COACH_PROMPTS.boss(CHAPTER),`Trivia verification notes:\n${ans}`);fb.classList.remove('loading');fb.classList.add('ready');fb.textContent=r;}
+  catch{fb.classList.remove('loading');fb.classList.add('ready');fb.textContent='✅ Saved!';}
+  markSectionDone(4);earnBadge('lie-spotter');updateProgress();
+  document.getElementById('s4-badge').classList.remove('hidden');document.getElementById('next-chapter').classList.remove('hidden');
+};
+window.copyBossOutput=function(){navigator.clipboard.writeText(document.getElementById('s4-answer').value).then(()=>{const b=document.getElementById('s4-copy');b.textContent='✅ Copied!';setTimeout(()=>{b.textContent='📋 Copy my notes → save for your demo';},2000);});};
+boot();
+</script>
+</body>
+</html>

@@ -9,6 +9,8 @@ venv/
 # Generated output (students will regenerate these)
 *.html
 !example/*.html
+!workbook/*.html
+!workbook/boss/*.html
 
 # OS
 .DS_Store
