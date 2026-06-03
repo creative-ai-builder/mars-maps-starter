@@ -194,7 +194,7 @@ await test('callCoach sends POST to proxy URL', async () => {
   let capturedUrl;
   global._fetchMock = (url, opts) => {
     capturedUrl = url;
-    return Promise.resolve({ ok: true, json: () => Promise.resolve({ content: [{ text: 'hi' }] }) });
+    return Promise.resolve({ ok: true, json: () => Promise.resolve({ content: [{ type: 'text', text: 'hi' }] }) });
   };
   await callCoach('sys', 'user input');
   assert(capturedUrl.includes('mars-proxy.creative-ai-builder.workers.dev'));
@@ -203,7 +203,7 @@ await test('callCoach sends x-api-key header', async () => {
   let capturedHeaders;
   global._fetchMock = (url, opts) => {
     capturedHeaders = opts.headers;
-    return Promise.resolve({ ok: true, json: () => Promise.resolve({ content: [{ text: 'hi' }] }) });
+    return Promise.resolve({ ok: true, json: () => Promise.resolve({ content: [{ type: 'text', text: 'hi' }] }) });
   };
   await callCoach('sys', 'input');
   assertEqual(capturedHeaders['x-api-key'], 'class2025');
@@ -212,7 +212,7 @@ await test('callCoach includes system prompt + user content', async () => {
   let capturedBody;
   global._fetchMock = (url, opts) => {
     capturedBody = JSON.parse(opts.body);
-    return Promise.resolve({ ok: true, json: () => Promise.resolve({ content: [{ text: 'hi' }] }) });
+    return Promise.resolve({ ok: true, json: () => Promise.resolve({ content: [{ type: 'text', text: 'hi' }] }) });
   };
   await callCoach('my system', 'my answer');
   assertEqual(capturedBody.system, 'my system');
@@ -220,9 +220,50 @@ await test('callCoach includes system prompt + user content', async () => {
 });
 await test('callCoach returns text from content[0].text', async () => {
   global._fetchMock = () =>
-    Promise.resolve({ ok: true, json: () => Promise.resolve({ content: [{ text: 'coach says hi' }] }) });
+    Promise.resolve({ ok: true, json: () => Promise.resolve({ content: [{ type: 'text', text: 'coach says hi' }] }) });
   const result = await callCoach('s', 'u');
   assertEqual(result, 'coach says hi');
+});
+await test('callCoach returns text even when thinking block comes first', async () => {
+  global._fetchMock = () =>
+    Promise.resolve({ ok: true, json: () => Promise.resolve({
+      content: [
+        { type: 'thinking', thinking: 'Let me think...' },
+        { type: 'text', text: 'the actual answer' },
+      ]
+    }) });
+  const result = await callCoach('s', 'u');
+  assertEqual(result, 'the actual answer');
+});
+await test('callCoach throws with HTTP status on non-ok response', async () => {
+  global._fetchMock = () =>
+    Promise.resolve({ ok: false, status: 429, text: () => Promise.resolve('rate limited') });
+  let errorMsg = '';
+  try { await callCoach('s', 'u'); } catch (e) { errorMsg = e.message; }
+  assert(errorMsg.includes('429'), `Expected 429 in error, got: ${errorMsg}`);
+});
+await test('callCoach throws on 401 unauthorized', async () => {
+  global._fetchMock = () =>
+    Promise.resolve({ ok: false, status: 401, text: () => Promise.resolve('{"error":"auth"}') });
+  let errorMsg = '';
+  try { await callCoach('s', 'u'); } catch (e) { errorMsg = e.message; }
+  assert(errorMsg.includes('401'), `Expected 401 in error, got: ${errorMsg}`);
+});
+await test('callCoach throws on empty content array', async () => {
+  global._fetchMock = () =>
+    Promise.resolve({ ok: true, json: () => Promise.resolve({ content: [] }) });
+  let threw = false;
+  try { await callCoach('s', 'u'); } catch { threw = true; }
+  assert(threw, 'should throw on empty content');
+});
+await test('callCoach throws on content with no text block', async () => {
+  global._fetchMock = () =>
+    Promise.resolve({ ok: true, json: () => Promise.resolve({
+      content: [{ type: 'thinking', thinking: 'only thinking, no text' }]
+    }) });
+  let threw = false;
+  try { await callCoach('s', 'u'); } catch { threw = true; }
+  assert(threw, 'should throw when no text block found');
 });
 await test('callCoach rejects on fetch error', async () => {
   global._fetchMock = () => Promise.reject(new Error('network down'));
@@ -236,7 +277,7 @@ console.log('\nQuestion generation (mocked fetch):');
 await test('generateQuestions returns parsed array from API', async () => {
   const mockQ = [{ vague: 'fix it', specific: 'fix the button color', why: 'units' }];
   global._fetchMock = () =>
-    Promise.resolve({ ok: true, json: () => Promise.resolve({ content: [{ text: JSON.stringify(mockQ) }] }) });
+    Promise.resolve({ ok: true, json: () => Promise.resolve({ content: [{ type: 'text', text: JSON.stringify(mockQ) }] }) });
   const result = await generateQuestions(1, 2);
   assertEqual(result[0].vague, 'fix it');
 });
@@ -245,7 +286,7 @@ await test('generateQuestions caches result — second call skips fetch', async 
   let fetchCount = 0;
   global._fetchMock = () => {
     fetchCount++;
-    return Promise.resolve({ ok: true, json: () => Promise.resolve({ content: [{ text: JSON.stringify(mockQ) }] }) });
+    return Promise.resolve({ ok: true, json: () => Promise.resolve({ content: [{ type: 'text', text: JSON.stringify(mockQ) }] }) });
   };
   await generateQuestions(1, 2);
   await generateQuestions(1, 2);
@@ -255,14 +296,14 @@ await test('generateQuestions uses cache if already set', async () => {
   const cached = [{ q: 'cached' }];
   setCachedQuestions(1, 3, cached);
   let fetched = false;
-  global._fetchMock = () => { fetched = true; return Promise.resolve({ ok: true, json: () => Promise.resolve({ content: [{ text: '[]' }] }) }); };
+  global._fetchMock = () => { fetched = true; return Promise.resolve({ ok: true, json: () => Promise.resolve({ content: [{ type: 'text', text: '[]' }] }) }); };
   const result = await generateQuestions(1, 3);
   assert(!fetched);
   assertEqual(result[0].q, 'cached');
 });
 await test('malformed JSON response returns fallback questions', async () => {
   global._fetchMock = () =>
-    Promise.resolve({ ok: true, json: () => Promise.resolve({ content: [{ text: 'not json at all' }] }) });
+    Promise.resolve({ ok: true, json: () => Promise.resolve({ content: [{ type: 'text', text: 'not json at all' }] }) });
   const result = await generateQuestions(1, 2);
   assert(Array.isArray(result));
   assert(result.length > 0);

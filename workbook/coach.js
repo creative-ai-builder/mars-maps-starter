@@ -103,11 +103,15 @@ export async function callCoach(systemPrompt, userContent, maxTokens = MAX_TOKEN
 
   const data = await res.json();
 
-  if (!data.content || !data.content[0] || !data.content[0].text) {
+  const textBlock = Array.isArray(data.content)
+    ? data.content.find(b => b.type === 'text')
+    : null;
+
+  if (!textBlock) {
     throw new Error(`Unexpected response shape: ${JSON.stringify(data)}`);
   }
 
-  return data.content[0].text;
+  return textBlock.text;
 }
 
 // ── Fallback questions (used when AI returns unparseable JSON) ───────────────
