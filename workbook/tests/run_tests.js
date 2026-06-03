@@ -218,11 +218,18 @@ await test('callCoach includes system prompt + user content', async () => {
   assertEqual(capturedBody.system, 'my system');
   assertEqual(capturedBody.messages[0].content, 'my answer');
 });
-await test('callCoach returns text from content[0].text', async () => {
+// Response shape tests are based on the Anthropic API spec, not implementation assumptions.
+// Documented content block types: text, thinking, tool_use, tool_result.
+// All valid API responses must be handled; callCoach must return the text block.
+await test('callCoach: text-only response (common case)', async () => {
   global._fetchMock = () =>
     Promise.resolve({ ok: true, json: () => Promise.resolve({ content: [{ type: 'text', text: 'coach says hi' }] }) });
-  const result = await callCoach('s', 'u');
-  assertEqual(result, 'coach says hi');
+  assertEqual(await callCoach('s', 'u'), 'coach says hi');
+});
+await test('callCoach: multiple text blocks — returns first', async () => {
+  global._fetchMock = () =>
+    Promise.resolve({ ok: true, json: () => Promise.resolve({ content: [{ type: 'text', text: 'first' }, { type: 'text', text: 'second' }] }) });
+  assertEqual(await callCoach('s', 'u'), 'first');
 });
 await test('callCoach returns text even when thinking block comes first', async () => {
   global._fetchMock = () =>
