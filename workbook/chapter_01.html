@@ -256,10 +256,11 @@ window.submitSection2 = async function() {
     unlockSection(3);
     loadSection3();
     document.getElementById('section-3').scrollIntoView({ behavior: 'smooth' });
-  } catch {
+  } catch (err) {
+    console.error('[coach] Section 2 error:', err);
     fb.classList.remove('loading');
     fb.classList.add('warning');
-    fb.textContent = '⚠️ Could not reach the coach. Move on — your answers were saved.';
+    fb.textContent = `⚠️ Coach error: ${err.message}. Your answers were saved.`;
     markSectionDone(2);
     unlockSection(3);
     loadSection3();
@@ -315,10 +316,11 @@ window.submitTryIt = async function(i, btn) {
     fb.classList.remove('loading');
     fb.classList.add(reply.includes('✅') ? 'ready' : 'warning');
     fb.textContent = reply;
-  } catch {
+  } catch (err) {
+    console.error('[coach] Try It error:', err);
     fb.classList.remove('loading');
     fb.classList.add('ready');
-    fb.textContent = '✅ Saved — coach unavailable right now.';
+    fb.textContent = `✅ Saved (coach error: ${err.message})`;
   }
 
   s3Done++;
@@ -353,10 +355,11 @@ window.submitBoss = async function() {
     updateProgress();
     document.getElementById('s4-badge').classList.remove('hidden');
     document.getElementById('next-chapter').classList.remove('hidden');
-  } catch {
+  } catch (err) {
+    console.error('[coach] Boss Level error:', err);
     fb.classList.remove('loading');
     fb.classList.add('ready');
-    fb.textContent = '✅ Saved! Coach unavailable — but your prompts are recorded.';
+    fb.textContent = `✅ Saved (coach error: ${err.message})`;
     markSectionDone(4);
     earnBadge('talker');
     updateProgress();

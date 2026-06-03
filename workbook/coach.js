@@ -95,7 +95,18 @@ export async function callCoach(systemPrompt, userContent, maxTokens = MAX_TOKEN
       messages: [{ role: 'user', content: userContent }],
     }),
   });
+
+  if (!res.ok) {
+    const errorText = await res.text().catch(() => '(no body)');
+    throw new Error(`HTTP ${res.status}: ${errorText}`);
+  }
+
   const data = await res.json();
+
+  if (!data.content || !data.content[0] || !data.content[0].text) {
+    throw new Error(`Unexpected response shape: ${JSON.stringify(data)}`);
+  }
+
   return data.content[0].text;
 }
 
